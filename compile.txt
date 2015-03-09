@@ -1,0 +1,5 @@
+python setup.py py2exe --includes sip
+
+
+
+Èe hoèeš pa compile za command line al pa sam da ma še cmd window zraven pa spremeni setup.py da zamenjaš windows z console
