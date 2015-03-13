@@ -1,0 +1,4 @@
+SUSE:/etc/SuSE-release:rpm:/var/log/messages
+Fedora:/etc/fedora-release:rpm:/var/log/messages
+Debian:/etc/debian_release:apt-get:/var/log/syslog
+RedHat:/etc/redhat-release:rpm:/var/log/messages

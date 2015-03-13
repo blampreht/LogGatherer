@@ -1,0 +1,23 @@
+1. get os type
+2. get system log
+3. check for sosreport
+4. run sosreport
+
+
+SUSE:/etc/SuSE-release:rpm:/var/log/messages
+Fedora:/etc/fedora-release:rpm:/var/log/messages
+Slackware:/etc/slackware-release:rpm:
+Debian:/etc/debian_release:rpm
+Mandrake:/etc/mandrake-release:rpm
+Yellow_dog:/etc/yellowdog-release:rpm
+Sun_JDS:/etc/sun-release
+Solaris_Sparc:/etc/release
+Gentoo:/etc/gentoo-release
+UnitedLinux:/etc/UnitedLinux-release
+RedHat:/etc/redhat-release
+
+
+cursor = db.execute('select * from linux_distro')
+    all_rows = cursor.fetchall()
+    for row in all_rows:
+        print('{0} : {1}, {2}'.format(row[0], row[1], row[2]))
