@@ -1,3 +1,12 @@
+############################################
+#
+# WorkingClass: A class that holds all
+#               main worker functions
+#
+# Author: blaz.lampreht@gmail.com
+#
+############################################
+
 import os.path
 from PyQt4 import QtGui
 

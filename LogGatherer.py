@@ -1,6 +1,15 @@
 #!/usr/bin/python
 # coding=utf-8
 
+############################################
+#
+# LogGatherer: main class
+#
+#
+# Author: blaz.lampreht@gmail.com
+#
+############################################
+
 ## imports ##
 
 import sys

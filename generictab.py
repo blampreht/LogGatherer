@@ -7,6 +7,15 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+#############################################
+#
+# generictab: A class that holds definitions
+#             for widgets for the generic tab
+#
+# Author: blaz.lampreht@gmail.com
+#
+#############################################
+
 from PyQt4 import QtCore, QtGui
 import WorkingClass
 
