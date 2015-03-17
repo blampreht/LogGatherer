@@ -7,15 +7,15 @@ def connect_database(database):
     db = sqlite3.connect(database)
     return db
 
-def ssh(username,password,hostname):
+def connect_ssh(username,password,hostname):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(hostname, username=username, password=password)
     return ssh
 
 
-def transfer_file(ssh, path,localpath):
-     if remote_exists(ssh,path):
+def transfer_file(ssh, path,localfile):
+     if remote_file_exists(ssh,path):
          try:
             sftp = ssh.open_sftp()
             sftp.get(path,localpath)
@@ -27,7 +27,7 @@ def transfer_file(ssh, path,localpath):
             return True
      return False
 
-def remote_exists(ssh, path):
+def remote_file_exists(ssh, path):
     try:
         sftp = ssh.open_sftp()
         sftp.stat(path)
@@ -38,21 +38,20 @@ def remote_exists(ssh, path):
     else:
         return True
 
-def get_os_type (ssh):
+def get_os_type(ssh):
     stdin, stdout, stderr = ssh.exec_command('uname')
     stdin.close()
     os_type= stdout.read().splitlines()
     return os_type[0]
 
-def check_distro(ssh, db):
+def get_distro_type(ssh, db):
     cursor = db.execute('select distro_name,version_file from linux_distro')
     all_rows = cursor.fetchall()
     for row in all_rows:
-        if remote_exists(ssh, row[1]):
+        if remote_file_exists(ssh, row[1]):
           return row[0]
 
-def get_syslog(ssh,db,distro):
+def get_syslog_filename(ssh,db,distro):
     cursor = db.execute('select system_log_file from linux_distro where distro_name=?',(distro,))
     first_row=cursor.fetchone()
     return first_row[0]
-
