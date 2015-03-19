@@ -12,7 +12,7 @@ linux_distro_list="linux_distro.txt"
 localpath="C:/razvoj/loggetter/discovery/test.txt"
 
 def connect_database():
-    db = sqlite3.connect('disco')
+    db = sqlite3.connect('disco.db')
     return db
 
 def remote_exists(ssh, path):
