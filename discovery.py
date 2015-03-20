@@ -79,16 +79,10 @@ def check_distro(ssh, db):
         if remote_exists(ssh, row[1]):
           return row[0]
 
-def get_syslog(ssh,db,distro):
-    cursor = db.execute('select system_log_file from linux_distro where distro_name=?',(distro,))
-    first_row=cursor.fetchone()
-    return first_row[0]
-
-
 
 def main():
-    host_ssh =prepare_ssh("root","root123","10.9.131.70")
-    sftp = prepare_sftp("root","root123","10.9.131.70")
+    host_ssh =prepare_ssh("root","","")
+    sftp = prepare_sftp("root","","")
     db =connect_database()
     os_type = get_os(host_ssh)
     if os_type == 'Linux':
