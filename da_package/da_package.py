@@ -16,9 +16,11 @@ def connect_database(database):
 def connect_ssh(username,password,hostname):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname, username=username, password=password)
-    return ssh
-
+    try:
+        ssh= ssh.connect(hostname, username=username, password=password)
+        return ssh
+    except Exception, e:
+        return None
 
 def transfer_file(ssh, path,localfile):
      if remote_file_exists(ssh,path):
@@ -95,19 +97,22 @@ def get_distro_version(ssh,distro_type):
 #http://www.unix.com/unix-for-advanced-and-expert-users/21468-machine.html#post83185
 def host_discovery(username,password,hostname,db):
     ssh_connection = connect_ssh(username,password,hostname)
-    os_type = get_os_type(ssh_connection)
-    if os_type == 'Linux':
-        distro_type = get_distro_type(ssh_connection,db)
-        os_version = get_distro_version(ssh_connection,distro_type)
-        return os_type,distro_type,os_version
-    if os_type =='AIX':
-        os_version= get_aix_version(ssh_connection)
-        distro_type = os_type
-        return os_type,distro_type,os_version
-    if os_type=='SunOS':
-        os_version = get_sunos_version(ssh_connection)
-        distro_type= os_type
-        return os_type,distro_type,os_version
+    if ssh_connection is not None:
+        os_type = get_os_type(ssh_connection)
+        if os_type == 'Linux':
+            distro_type = get_distro_type(ssh_connection,db)
+            os_version = get_distro_version(ssh_connection,distro_type)
+            return os_type,distro_type,os_version   
+        if os_type =='AIX':
+            os_version= get_aix_version(ssh_connection)
+            distro_type = os_type
+            return os_type,distro_type,os_version
+        if os_type=='SunOS':
+            os_version = get_sunos_version(ssh_connection)
+            distro_type= os_type
+            return os_type,distro_type,os_version
+    else:
+        return None
 
 
 def get_log(ssh,remote_logfile,local_destination):
