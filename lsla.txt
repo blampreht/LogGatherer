@@ -1,35 +1,33 @@
 Command: ls -al / 
-Date & Time: 03/20/15 14:09:31 
-total 142
-dr-xr-xr-x.  29 root   root      4096 Mar 16 08:54 .
-dr-xr-xr-x.  29 root   root      4096 Mar 16 08:54 ..
--rw-r--r--    1 root   root         0 Mar  3 11:36 .autofsck
--rw-r--r--    1 root   root         0 Feb 19 15:56 .autorelabel
-dr-xr-xr-x.   2 root   root      4096 Feb 10 14:46 bin
-dr-xr-xr-x.   5 root   root      1024 Oct 29 10:16 boot
-drwxr-xr-x.   2 root   root      4096 Jul 26  2011 cgroup
-drwxr-xr-x.   6 root   root      4096 Oct 29 10:58 DB2Data
-drwx------.   3 root   root      4096 Oct 29 10:19 .dbus
-drwxr-xr-x   18 root   root      3860 Mar 15 03:43 dev
-drwxr-xr-x. 115 root   root     12288 Mar 19 10:10 etc
-drwxr-xr-x.   8 root   root      4096 Mar  9 10:31 home
-dr-xr-xr-x.  13 root   root      4096 Feb 10 14:45 lib
-dr-xr-xr-x.   9 root   root     12288 Feb 10 14:46 lib64
-drwx------.   2 root   root     16384 Oct 29 10:10 lost+found
-drwxr-xr-x.   2 root   root      4096 Jan 27 10:37 media
-dr-xr-xr-x.   2 root   root      4096 Oct 29 13:42 misc
-drwxr-xr-x.   3 root   root      4096 Oct 29 10:29 mnt
-dr-xr-xr-x.   2 root   root      4096 Oct 29 13:42 net
-drwxr-xr-x.   6 root   root      4096 Mar 25  2012 opt
-drwxr-xr-x.  14 oracle oinstall  4096 Mar 11 15:34 oracle
-dr-xr-xr-x  160 root   root         0 Mar  3 11:35 proc
-dr-xr-x---.  26 root   root      4096 Mar 16 11:25 root
--rwx------.   1 root   root        24 Mar 20 14:10 .rsct-health-check-DO_NOT_DELETE
-dr-xr-xr-x.   2 root   root     12288 Mar  9 10:42 sbin
-drwxr-xr-x.   2 root   root      4096 Oct 29 10:11 selinux
-drwxr-xr-x.   2 root   root      4096 Jun 28  2011 srv
-drwxr-xr-x   13 root   root         0 Mar  3 11:35 sys
-drwxrwxrwt.   8 root   root      4096 Mar 20 03:36 tmp
-drwxr-xr-x.  14 root   root      4096 Nov  3 13:01 usr
-drwxr-xr-x.  27 root   root      4096 Oct 29 10:45 var
-drwxr-xr-x.   2 root   root      4096 Feb 19 15:31 webroot
+Date & Time: 03/30/15 09:11:38 
+total 144
+dr-xr-xr-x.  28 root   root      4096 Mar  9 21:29 .
+dr-xr-xr-x.  28 root   root      4096 Mar  9 21:29 ..
+-rw-r--r--    1 root   root         0 Feb 11 21:26 .autofsck
+-rw-r--r--    1 root   root         0 Sep  2  2014 .autorelabel
+dr-xr-xr-x.   2 root   root      4096 Oct  4 03:49 bin
+dr-xr-xr-x.   5 root   root      4096 Sep  2  2014 boot
+drwxr-xr-x.   2 root   root      4096 Dec  9  2013 cgroup
+drwxr-xr-x   20 root   root      3980 Feb 11 21:26 dev
+drwxr-xr-x    5 root   root      4096 Feb 17 15:00 download
+drwxr-xr-x. 118 root   root     12288 Mar 25 03:17 etc
+drwxr-xr-x.   4 root   root      4096 Oct  9 16:21 home
+dr-xr-xr-x.  13 root   root      4096 Sep  2  2014 lib
+dr-xr-xr-x.  10 root   root     12288 Sep  2  2014 lib64
+drwx------.   2 root   root     16384 Sep  2  2014 lost+found
+drwxr-xr-x.   2 root   root      4096 Nov  1  2011 media
+drwxr-xr-x.   2 root   root      4096 Jun  9  2014 misc
+drwxr-xr-x.   2 root   root      4096 Nov  1  2011 mnt
+drwxr-xr-x.   2 root   root      4096 Jun  9  2014 net
+drwxr-xr-x.   6 root   root      4096 Nov  4 09:00 opt
+dr-xr-xr-x  217 root   root         0 Feb 11 21:26 proc
+dr-xr-x---.  27 root   root      4096 Mar  9 22:17 root
+dr-xr-xr-x.   2 root   root     12288 Sep  2  2014 sbin
+drwxr-xr-x.   2 root   root      4096 Sep  2  2014 selinux
+drwxr-xr-x.   2 root   root      4096 Nov  1  2011 srv
+dr-xr-xr-x   13 root   root         0 Feb 11 21:26 sys
+drwxrwxrwt.  13 root   root     12288 Mar 30 03:37 tmp
+drwxr-xr-x    3 oracle oinstall  4096 Sep  2  2014 u01
+drwxr-xr-x.  13 root   root      4096 Feb 12 11:15 usr
+drwxr-xr-x.  23 root   root      4096 Jan 12 14:06 var
+drwxr-xr-x    4 root   root      4096 Oct 17 10:41 zacasno
