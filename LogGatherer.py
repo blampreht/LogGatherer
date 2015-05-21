@@ -17,6 +17,7 @@ from PyQt4 import QtCore, QtGui
 from sceleton import Ui_sceleton
 from generictab import genericTab
 import WorkingClass
+import error
 
 ## Class ##
 
@@ -108,7 +109,7 @@ class StartQT4(QtGui.QMainWindow):
             if fileparts[len(fileparts)-1] != "lhost":
                 path2savefile = path2savefile + ".lhost"
 
-            if wc.saveContentsToFile(path2savefile, self.ui.tabWidget.currentWidget()) == 0:
+            if wc.saveContentsToFile(path2savefile, self.ui.tabWidget.currentWidget()) == error.NO_ERROR:
                 self.ui.tabWidget.setTabText(self.ui.tabWidget.currentIndex(), title[len(title)-1])
             else:
                 QtGui.QMessageBox.warning(self, "Error saving file", "There was an error saving file !")
@@ -125,7 +126,14 @@ class StartQT4(QtGui.QMainWindow):
 
     def GetLogs(self):
         wc = WorkingClass.WorkingClass()
-        wc.getLogs(self.ui.tabWidget)
+        retval = wc.getLogs(self.ui.tabWidget)
+
+        #print "Return value: " + str(retval[1])
+
+        if retval[1] != error.NO_ERROR:
+            QtGui.QMessageBox.warning(self, "Error getting logs.", "Error doing as requested on tab: " + str(retval[0]+1))
+        else:
+            QtGui.QMessageBox.warning(self,"Success","All logs successfully gathered.")
 
 
 ## Main function - application start

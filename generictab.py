@@ -18,6 +18,7 @@
 
 from PyQt4 import QtCore, QtGui
 import WorkingClass
+import error
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -36,11 +37,11 @@ except AttributeError:
 class Ui_genericTab(object):
     def setupUi(self, genericTab):
         genericTab.setObjectName(_fromUtf8("genericTab"))
-        genericTab.resize(535, 380)
-        genericTab.setMinimumSize(QtCore.QSize(535, 380))
-        genericTab.setMaximumSize(QtCore.QSize(535, 380))
+        genericTab.resize(535, 500)
+        genericTab.setMinimumSize(QtCore.QSize(535, 500))
+        genericTab.setMaximumSize(QtCore.QSize(535, 500))
         self.groupBox_2 = QtGui.QGroupBox(genericTab)
-        self.groupBox_2.setGeometry(QtCore.QRect(0, 180, 531, 201))
+        self.groupBox_2.setGeometry(QtCore.QRect(0, 270, 531, 201))
         self.groupBox_2.setStyleSheet(_fromUtf8("QGroupBox { \n"
 "    font:10pt \"URW Gothic L\";\n"
 "    color: blue;\n"
@@ -63,7 +64,7 @@ class Ui_genericTab(object):
         self.chkOracle.setGeometry(QtCore.QRect(20, 50, 121, 21))
         self.chkOracle.setObjectName(_fromUtf8("chkOracle"))
         self.chkLinux = QtGui.QCheckBox(self.groupBox_2)
-        self.chkLinux.setGeometry(QtCore.QRect(20, 100, 421, 21))
+        self.chkLinux.setGeometry(QtCore.QRect(20, 100, 291, 21))
         self.chkLinux.setObjectName(_fromUtf8("chkLinux"))
         self.lblSaveLogs2 = QtGui.QLabel(self.groupBox_2)
         self.lblSaveLogs2.setGeometry(QtCore.QRect(20, 160, 101, 16))
@@ -113,6 +114,19 @@ class Ui_genericTab(object):
         self.lineEdit_4.setGeometry(QtCore.QRect(180, 115, 321, 23))
         self.lineEdit_4.setEchoMode(QtGui.QLineEdit.Password)
         self.lineEdit_4.setObjectName(_fromUtf8("lineEdit_4"))
+        self.btnDiscover = QtGui.QPushButton(genericTab)
+        self.btnDiscover.setGeometry(QtCore.QRect(10, 180, 121, 23))
+        self.btnDiscover.setObjectName(_fromUtf8("btnDiscover"))
+        self.lblDiscovery = QtGui.QLabel(genericTab)
+        self.lblDiscovery.setGeometry(QtCore.QRect(150, 185, 171, 16))
+        self.lblDiscovery.setObjectName(_fromUtf8("lblDiscovery"))
+        self.lblJustALabel = QtGui.QLabel(genericTab)
+        self.lblJustALabel.setGeometry(QtCore.QRect(10, 220, 111, 16))
+        self.lblJustALabel.setObjectName(_fromUtf8("lblJustALabel"))
+        self.lblServerInfo = QtGui.QLabel(genericTab)
+        self.lblServerInfo.setGeometry(QtCore.QRect(150, 220, 61, 15))
+        self.lblServerInfo.setText(_fromUtf8(""))
+        self.lblServerInfo.setObjectName(_fromUtf8("lblServerInfo"))
 
         self.retranslateUi(genericTab)
         QtCore.QMetaObject.connectSlotsByName(genericTab)
@@ -121,13 +135,16 @@ class Ui_genericTab(object):
         genericTab.setWindowTitle(_translate("genericTab", "Form", None))
         self.groupBox_2.setTitle(_translate("genericTab", "Log gathering", None))
         self.chkOracle.setText(_translate("genericTab", "Oracle logs", None))
-        self.chkLinux.setText(_translate("genericTab", "Linux system logs (actually does a sosreport)", None))
+        self.chkLinux.setText(_translate("genericTab", "System logs", None))
         self.lblSaveLogs2.setText(_translate("genericTab", "Save logs to:", None))
         self.btnBrowse.setText(_translate("genericTab", "Browse...", None))
         self.groupBox.setTitle(_translate("genericTab", "Credentials", None))
         self.lblhostname.setText(_translate("genericTab", "Hostname/IP Address:", None))
         self.lblUsername.setText(_translate("genericTab", "Username:", None))
         self.lblPassword.setText(_translate("genericTab", "Password:", None))
+        self.btnDiscover.setText(_translate("genericTab", "Discover server", None))
+        self.lblDiscovery.setText(_translate("genericTab", "Server not discovered yet", None))
+        self.lblJustALabel.setText(_translate("genericTab", "Server info:", None))
 
 
 class genericTab(QtGui.QWidget, Ui_genericTab):
@@ -137,6 +154,7 @@ class genericTab(QtGui.QWidget, Ui_genericTab):
         self.setupUi(self)
 
         QtCore.QObject.connect(self.btnBrowse,QtCore.SIGNAL("clicked()"), self.browseFolder)
+        QtCore.QObject.connect(self.btnDiscover,QtCore.SIGNAL("clicked()"), self.discoverServer)
 
         ## Read the file
 
@@ -164,4 +182,22 @@ class genericTab(QtGui.QWidget, Ui_genericTab):
         fd = QtGui.QFileDialog(self)
         path2Logs = fd.getExistingDirectory()
         self.leLogs.setText(path2Logs)
+
+    def discoverServer(self):
+        wc = WorkingClass.WorkingClass()
+        hostname = str(self.lineEdit_2.text())
+        username = str(self.lineEdit_3.text())
+        password = str(self.lineEdit_4.text())
+
+        serverinfo = wc.returnServerInfo(username, password, hostname)
+
+        if serverinfo is not error.SSH_ERROR:
+            self.lblDiscovery.setStyleSheet("QLabel { color : black; }")
+            self.lblDiscovery.setText("Server discovered !")
+            self.lblServerInfo.setText(str(serverinfo[0]) + " " + str(serverinfo[1]) + "\nVersion: " + str(serverinfo[2]))
+            self.lblServerInfo.adjustSize()
+        else:
+            self.lblDiscovery.setText("There was an error connecting via SSH !")
+            self.lblDiscovery.setStyleSheet("QLabel { color : red; }")
+            self.lblDiscovery.setMinimumWidth(500)
 

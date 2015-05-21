@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'sceleton.ui'
 #
-# Created: Fri Mar  6 10:36:07 2015
+# Created: Fri Mar 20 14:46:49 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,14 +26,14 @@ except AttributeError:
 class Ui_sceleton(object):
     def setupUi(self, sceleton):
         sceleton.setObjectName(_fromUtf8("sceleton"))
-        sceleton.resize(567, 516)
+        sceleton.resize(567, 600)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(sceleton.sizePolicy().hasHeightForWidth())
         sceleton.setSizePolicy(sizePolicy)
-        sceleton.setMinimumSize(QtCore.QSize(567, 516))
-        sceleton.setMaximumSize(QtCore.QSize(567, 516))
+        sceleton.setMinimumSize(QtCore.QSize(567, 600))
+        sceleton.setMaximumSize(QtCore.QSize(567, 600))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -48,17 +48,17 @@ class Ui_sceleton(object):
         self.centralwidget = QtGui.QWidget(sceleton)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.btnGetLogs = QtGui.QPushButton(self.centralwidget)
-        self.btnGetLogs.setGeometry(QtCore.QRect(470, 450, 91, 23))
+        self.btnGetLogs.setGeometry(QtCore.QRect(470, 530, 91, 23))
         self.btnGetLogs.setObjectName(_fromUtf8("btnGetLogs"))
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(6, 9, 554, 422))
+        self.tabWidget.setGeometry(QtCore.QRect(6, 9, 554, 500))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
-        self.tabWidget.setMinimumSize(QtCore.QSize(554, 422))
-        self.tabWidget.setMaximumSize(QtCore.QSize(554, 422))
+        self.tabWidget.setMinimumSize(QtCore.QSize(554, 500))
+        self.tabWidget.setMaximumSize(QtCore.QSize(554, 500))
         self.tabWidget.setTabsClosable(True)
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
         sceleton.setCentralWidget(self.centralwidget)

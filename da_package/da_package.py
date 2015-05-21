@@ -4,6 +4,7 @@ import paramiko
 import sqlite3
 import os
 import time
+import error
 
 def connect_database(database):
     if os.path.exists(database):
@@ -16,20 +17,20 @@ def connect_database(database):
 def connect_ssh(username,password,hostname):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    #print username + " " + password + " " + hostname
     try:
-        ssh.connect(hostname=hostname, username=username, password=password)
+        ssh.connect(hostname=hostname, username=username, password=password, timeout=5)
         return ssh
     except Exception, e:
-        return None
+        return error.SSH_ERROR
 
 
-def transfer_file(ssh, path,localfile):
+def transfer_file(ssh, path, localfile):
      if remote_file_exists(ssh,path):
          try:
             sftp = ssh.open_sftp()
             sftp.get(path,localfile)
          except IOError, e:
+            print "Error: " + str(e)
             if e[0] == 2:
                 return False
             raise
@@ -95,12 +96,24 @@ def get_distro_version(ssh,distro_type):
         os_version= remote_execute(ssh,'cat /etc/debian_version')
         return os_version[0]
 
+#
+# Check if Oracle DB is present
+# If it is, get the alert log
+#
+def oracle_discovery(ssh):
+    oracle_names=remote_execute(ssh,'cat /etc/oratab|grep product|tr ":" " "|awk {\'print $1\'}')
+
+    for i in oracle_names:
+        print i
+
+
 
 #http://www.unix.com/unix-for-advanced-and-expert-users/21468-machine.html#post83185
 def host_discovery(username,password,hostname,db):
     ssh_connection = connect_ssh(username,password,hostname)
-    os_type = get_os_type(ssh_connection)
-    if ssh_connection is not None:
+
+    if ssh_connection is not error.SSH_ERROR:
+        os_type = get_os_type(ssh_connection)
         if os_type == 'Linux':
             distro_type = get_distro_type(ssh_connection,db)
             os_version = get_distro_version(ssh_connection,distro_type)
@@ -114,7 +127,7 @@ def host_discovery(username,password,hostname,db):
             distro_type= os_type
             return os_type,distro_type,os_version
     else:
-        return None
+        return error.SSH_ERROR
 
 def get_log(ssh,remote_logfile,local_destination):
     if transfer_file(ssh,remote_logfile,local_destination):
